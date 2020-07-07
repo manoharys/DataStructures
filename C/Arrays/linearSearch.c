@@ -4,9 +4,9 @@
 
    *****Improving linear search******
     If we're searching for an element in an array there is a possibility that we might
-    search for a same element again, if so this methods improves linear search
+    search for a same element again, if so this methods improves linear search.
       1) Transposition -> whenever we find key element, we swap key element by previous element
-                          this gradually this decrease time complexity.
+                          this gradually decreases time complexity.
       2) MoveToHead/MoveToFront -> Swap the key element with the first element of an array, So if we
                                    search for a same element again it can be found in constant time O(1)
 */
