@@ -1,6 +1,11 @@
 /*
-  1. Counting number element in the linked list
-  2.
+  1. Counting number of nodes present in the linked list using loop & recursion.
+
+  2. Finding the sum of elements present in the linked list using loops & recursion.
+
+  3. Finding Maximum and minimum element present in the linked list using loops & recursion.
+  
+  4. Searching a key element using loops and recursion.
 */
 
 
@@ -145,6 +150,46 @@ int min(struct node *p){
    return (mm);
  }
 
+ void searchElement(struct node *p, int key){
+   int  node=1, found = 0;
+
+   while(p != NULL){
+      if(key == p->data){
+         printf("Key element %d found at node %d\n", key, node);
+         found = 1;
+         break;
+      }
+      else{
+        node++;
+        p = p->next;
+      }
+   }
+   if(found == 0){
+    printf("Key element not found\n");
+   }
+ }
+
+ void searchRecursive(struct node *p, int key){
+   static int nodeCount;
+   int found = 0;
+   if(p != NULL){
+     if(key == p->data){
+        printf("Key element %d is found at node %d\n", key, ++nodeCount);
+        found = 1;
+        return;
+     }
+     else{
+        ++nodeCount;
+        searchRecursive(p->next, key);
+     }
+   }
+   if(found == 0){
+    printf("Key element is not found\n");
+
+   }
+ }
+
+
 int main(){
 
   append();
@@ -157,5 +202,13 @@ int main(){
   printf("Maximum element in the linked list using recursion = %d\n", maxRecursion(root));
   printf("Minimun element in the linked list = %d\n", min(root));
   printf("Minimum element in the linked list using recursion = %d\n", minRecursion(root, 0));
+
+  int key;
+  printf("Enter the key element to be searched\n");
+  scanf("%d", &key);
+  printf("Using loops\n");
+  searchElement(root, key);
+  printf("Using recursion\n");
+  searchElement(root, key);
 }
 
