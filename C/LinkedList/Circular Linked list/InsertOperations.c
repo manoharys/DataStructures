@@ -35,16 +35,22 @@ struct node{
 
 //Displaying the list
 void display(){
-  struct node *p = head;
-    printf("first Address : %d->", p->next);
-  do {
-    printf("%d->", p->data);
-    p = p->next;
-  }while(p != head);
 
-    printf("%d last Address\n",p->next);
+  if(count() == 0){
+    printf("No nodes in the list\n");
+    exit(0);
+  }
+  else{
+      struct node *p = head;
+        printf("first Address : %d->", p->next);
+      do {
+        printf("%d->", p->data);
+        p = p->next;
+      }while(p != head);
+
+        printf("%d last Address\n",p->next);
+  }
 }
-
 //Appending element to the last node
 void append(){
  struct node *temp, *p = head;
@@ -93,7 +99,7 @@ int count(){
 
  void appendPosition(){
    int pos;
-   printf("Enter the position to insert a data & there are %d nodes\n");
+   printf("Enter the position to insert a data & there are %d nodes\n", count());
    scanf("%d", &pos);
    if(pos>0 && pos<=count()){
    struct node *temp, *p = head;
@@ -122,6 +128,40 @@ int count(){
     printf("Enter the valid position\n");
    }
  }
+
+ void deleteNode(){
+  int pos;
+  printf("Enter the node position to delete that node & there are %d nodes present\n", count());
+  scanf("%d", &pos);
+  if(pos>0 && pos<=count()){
+      if(count() == 1){
+        head = NULL;
+      }
+   else if(pos == 1){
+        struct node *p = head;
+        p = p->next;
+        while(p->next != head){
+            p = p->next;
+        }
+        head = head->next;
+        p->next = head;
+     }
+     else{
+        struct node *p = head, *temp = NULL;
+        for(int i=1;i<pos-1;i++){
+            p = p->next;
+        }
+        temp = p->next;
+        p->next = temp->next;
+        temp->next = NULL;
+        free(temp);
+     }
+  }
+  else{
+    printf("Enter the valid position\n");
+  }
+}
+
 int main(){
   int choice;
   create();
@@ -132,6 +172,7 @@ int main(){
   printf("Enter 3 to insert at specific position\n");
   printf("Enter 4 to display element in circular linked list\n");
   printf("Enter 5 to count the number of element in the circular linked list\n");
+  printf("Enter 6 to delete a node\n");
   scanf("%d", &choice);
 
       switch(choice){
@@ -144,6 +185,8 @@ int main(){
         case 4: display();
                 break;
         case 5: count();
+                break;
+        case 6: deleteNode();
                 break;
         default: printf("Choose the valid options\n");
       }
